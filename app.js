@@ -10,17 +10,9 @@ mongoose.connect('mongodb://localhost/mongoose-ecommerce')
 app.use(bodyParser.urlencoded({ extended: true }));
 app.listen(process.env.PORT || 9000)
 
-//correct order?
-
 var User = require('./models/user')
 var Product = require('./models/product')
 var Order = require('./models/order')
-
-var stressball = new Product({
-  name: 'Squeezy Ball',
-  price: 4.50,
-  description: 'Squishy'
-})
 
 var orderOne = new Order ({
   price: '4.50',
@@ -33,35 +25,43 @@ var orderOne = new Order ({
   },
 })
 
+orderOne.users.push({
+name: 'Amelia Earhart',
+gender: 'Female',
+dob: 05/06/1987
+})
+
 orderOne.save(function(err, order) {
   if (err) console.log(err)
     console.log('OrderOne saved!')
 })
 
-// orderOnestressball.push({
-//   
-// })
+var stressball = new Product({
+  name: 'Squeezy Ball',
+  price: 4.50,
+  description: 'Squishy'
+})
 
 stressball.save(function(err, product) {
   if (err) console.log(err)
     console.log('Squeezy Ball saved!')
 })
 
-var userOne = new User({
-  name: 'Amelia Earhart',
-  gender: 'Female',
-  dob: 05/06/1987
-})
+// var userOne = new User({
+//   name: 'Amelia Earhart',
+//   gender: 'Female',
+//   dob: 05/06/1987
+// })
 
-userOne.save(function(err, product) {
-  if (err) console.log(err)
-    console.log('Amelia Earhart saved!')
-})
-
-// Order
-// .findOne(_order.id)
-// .populate(product)//?
-// .exec(function (err, order) {
+// userOne.save(function(err, product) {
 //   if (err) console.log(err)
-//     console.log(order)
+//     console.log('Amelia Earhart saved!')
+// })
+
+// Product
+// .findOne(product.id) //nothing writing to db so not found
+// .populate(name)
+// .exec(function (err, product) {
+//   if (err) console.log(err)
+//     console.log(product)
 //   })
